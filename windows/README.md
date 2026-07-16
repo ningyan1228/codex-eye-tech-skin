@@ -24,7 +24,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start-cyber-skin.p
 
 脚本绝不会关闭或重启现有窗口；它只会新启动一个仅绑定到 `127.0.0.1:9336` 的 Codex 会话，并且不会写入或迁移任何 Codex 配置。
 
-`launch-cyber-aurora.ps1` is the one-click launcher used by the optional taskbar icon. It shows a message instead of closing an already-open ChatGPT/Codex window.
+`launch-cyber-aurora.ps1` is the one-click launcher used by the optional taskbar icon. When the Store app is already running, it asks for explicit confirmation before closing it and starting the wallpaper session.
 
 ## 随时更换背景
 
