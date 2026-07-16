@@ -130,7 +130,7 @@ async function verify(session) {
       stylePresent: Boolean(document.getElementById('codex-cyber-skin-style')),
       chromePresent: Boolean(chrome),
       chromePointerEvents: getComputedStyle(chrome || document.body).pointerEvents,
-      sidebar: box('aside.app-shell-left-panel'),
+      sidebar: box('aside.app-shell-left-panel') || box('aside') || box('[class*="sidebar"]'),
       composer: box('.composer-surface-chrome')
     };
     result.pass = result.installed && result.stylePresent && result.chromePresent && result.chromePointerEvents === 'none' && Boolean(result.sidebar) && Boolean(result.composer);

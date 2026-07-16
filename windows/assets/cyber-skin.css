@@ -34,7 +34,9 @@ html.codex-cyber-skin body::before {
   mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, .4));
 }
 
-html.codex-cyber-skin aside.app-shell-left-panel {
+html.codex-cyber-skin aside,
+html.codex-cyber-skin aside.app-shell-left-panel,
+html.codex-cyber-skin [class*="sidebar"] {
   color: var(--cyber-ink) !important;
   background: linear-gradient(180deg, rgba(4, 15, 28, .93), rgba(7, 21, 38, .80)) !important;
   border-right: 1px solid var(--cyber-line) !important;
@@ -42,14 +44,30 @@ html.codex-cyber-skin aside.app-shell-left-panel {
   backdrop-filter: blur(24px) saturate(120%) !important;
 }
 
+html.codex-cyber-skin aside nav,
+html.codex-cyber-skin aside [class*="bg-token"],
 html.codex-cyber-skin aside.app-shell-left-panel nav,
 html.codex-cyber-skin aside.app-shell-left-panel [class*="bg-token"] {
   background: transparent !important;
 }
 
+html.codex-cyber-skin aside button,
 html.codex-cyber-skin aside.app-shell-left-panel button {
   color: #cce7eb !important;
+  opacity: 1 !important;
   transition: background .16s ease, box-shadow .16s ease, transform .16s ease !important;
+}
+
+/* Codex applies light-theme text utilities to many sidebar labels.  They need
+   an explicit foreground because color inherited from the panel is not enough. */
+html.codex-cyber-skin aside :is(a, button, [role="button"], h1, h2, h3, p, span),
+html.codex-cyber-skin aside.app-shell-left-panel :is(a, button, [role="button"], h1, h2, h3, p, span) {
+  color: #cce7eb !important;
+}
+
+html.codex-cyber-skin aside :is(a, button, [role="button"]) > *,
+html.codex-cyber-skin aside.app-shell-left-panel :is(a, button, [role="button"]) > * {
+  opacity: 1 !important;
 }
 
 html.codex-cyber-skin aside.app-shell-left-panel button:hover,
@@ -79,6 +97,25 @@ html.codex-cyber-skin [role="main"] {
   scrollbar-color: rgba(87, 230, 220, .52) transparent;
 }
 
+/* Keep landing-page headings readable without recolouring the white action
+   cards, whose captions are spans and intentionally remain dark. */
+html.codex-cyber-skin main :is(h1, h2, h3, p, li),
+html.codex-cyber-skin [role="main"] :is(h1, h2, h3),
+html.codex-cyber-skin [data-message-author-role],
+html.codex-cyber-skin [role="main"] :is(p, li),
+html.codex-cyber-skin [role="main"] :is(article, [class*="markdown"], [class*="prose"]) :is(p, li, span) {
+  color: #eefcfc !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .72);
+}
+
+/* Action cards use a light surface and must retain their native dark caption. */
+html.codex-cyber-skin main button :is(p, li, span),
+html.codex-cyber-skin [role="main"] button :is(p, li, span) {
+  color: #24343b !important;
+  text-shadow: none !important;
+}
+
 html.codex-cyber-skin .composer-surface-chrome {
   color: var(--cyber-ink) !important;
   border: 1px solid rgba(100, 230, 220, .42) !important;
@@ -92,6 +129,13 @@ html.codex-cyber-skin textarea,
 html.codex-cyber-skin input {
   color: var(--cyber-ink) !important;
   caret-color: var(--cyber-cyan) !important;
+}
+
+html.codex-cyber-skin .ProseMirror p,
+html.codex-cyber-skin textarea::placeholder,
+html.codex-cyber-skin input::placeholder {
+  color: #b9d5d9 !important;
+  opacity: 1 !important;
 }
 
 html.codex-cyber-skin [data-message-author-role],
