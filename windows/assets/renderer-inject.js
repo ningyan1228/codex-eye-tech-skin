@@ -39,7 +39,7 @@
       chrome.innerHTML = '<div class="cyber-scanline"></div><div class="cyber-brand"></div><div class="cyber-corner"></div>';
       document.body.appendChild(chrome);
     }
-    chrome.querySelector(".cyber-brand").textContent = "AURORA";
+    chrome.querySelector(".cyber-brand")?.remove();
     if (shell) {
       const box = shell.getBoundingClientRect();
       chrome.style.left = `${Math.round(box.left)}px`;
