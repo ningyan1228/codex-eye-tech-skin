@@ -111,7 +111,9 @@ async function loadPayload() {
     fs.readFile(path.join(root, "assets", "renderer-inject.js"), "utf8"),
     fs.readFile(path.join(root, "assets", "background.json"), "utf8"),
   ]);
-  const settings = JSON.parse(backgroundConfig);
+  // Windows PowerShell 5 writes UTF-8 with a BOM by default.  Theme changes
+  // made through set-cyber-background.ps1 must therefore accept either form.
+  const settings = JSON.parse(backgroundConfig.replace(/^\uFEFF/, ""));
   const imagePath = path.join(root, "assets", settings.file);
   const image = await fs.readFile(imagePath);
   const dataUrl = `data:${mimeType(imagePath)};base64,${image.toString("base64")}`;
