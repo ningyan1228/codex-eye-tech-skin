@@ -34,21 +34,6 @@ html.codex-cyber-skin body::before {
   mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, .4));
 }
 
-/* The Windows title/menu strip is transparent in this build of ChatGPT. A
-   restrained light backing keeps its native dark labels readable over photos. */
-html.codex-cyber-skin body::after {
-  content: "";
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 35px;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgba(231, 239, 241, .94), rgba(213, 226, 230, .86));
-  border-bottom: 1px solid rgba(11, 38, 48, .22);
-}
-
 html.codex-cyber-skin aside,
 html.codex-cyber-skin aside.app-shell-left-panel,
 html.codex-cyber-skin [class*="sidebar"] {
