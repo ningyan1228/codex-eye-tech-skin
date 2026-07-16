@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Codex Eye Tech Skin — Aurora Calm</title>
+    <style>
+      :root {
+        --surface: #101a24;
+        --surface-raised: #172532;
+        --surface-soft: #1c2d3b;
+        --ink: #d8e7ee;
+        --muted: #91a8b5;
+        --accent: #4fd1c5;
+        --accent-soft: rgba(79, 209, 197, 0.16);
+        --border: rgba(180, 217, 228, 0.16);
+        --good: #71c994;
+        --bad: #f08d8d;
+        --skill: #92a8ff;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        color: var(--ink);
+        background: radial-gradient(circle at 85% 8%, rgba(79, 209, 197, 0.12), transparent 30rem), #091117;
+        font: 14px/1.5 "Microsoft YaHei UI", "Segoe UI", sans-serif;
+      }
+      body.light {
+        --surface: #edf4f5;
+        --surface-raised: #ffffff;
+        --surface-soft: #dcebed;
+        --ink: #20313d;
+        --muted: #5d7480;
+        --accent: #167e87;
+        --accent-soft: rgba(22, 126, 135, 0.12);
+        --border: rgba(32, 49, 61, 0.15);
+        --good: #318a65;
+        --bad: #c85e5e;
+        --skill: #506fd4;
+        background: radial-gradient(circle at 85% 8%, rgba(22, 126, 135, 0.11), transparent 30rem), #dfeaec;
+      }
+      .window {
+        width: min(1120px, calc(100vw - 32px));
+        min-height: 640px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 246px 1fr;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 45px rgba(79, 209, 197, 0.05);
+      }
+      aside { padding: 22px 14px; background: #0d1720; border-right: 1px solid var(--border); }
+      body.light aside { background: #e6f0f1; }
+      .brand { display: flex; align-items: center; gap: 10px; padding: 0 8px 24px; font-weight: 700; letter-spacing: .02em; }
+      .orb { width: 23px; height: 23px; border-radius: 50%; background: conic-gradient(from 220deg, var(--accent), var(--skill), #204d61, var(--accent)); box-shadow: 0 0 20px rgba(79, 209, 197, .5); }
+      .new-task { width: 100%; padding: 10px 12px; border: 1px solid rgba(79, 209, 197, .42); border-radius: 9px; color: var(--accent); background: var(--accent-soft); font: inherit; }
+      .label { margin: 26px 9px 8px; color: var(--muted); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; }
+      .thread { padding: 9px 10px; border-radius: 8px; color: var(--muted); }
+      .thread.active { color: var(--ink); background: var(--surface-soft); box-shadow: inset 2px 0 var(--accent); }
+      main { display: flex; min-width: 0; flex-direction: column; }
+      header { height: 66px; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; border-bottom: 1px solid var(--border); }
+      h1 { margin: 0; font-size: 16px; font-weight: 650; }
+      .badge { padding: 4px 9px; border: 1px solid rgba(146, 168, 255, .34); border-radius: 999px; color: var(--skill); background: rgba(146, 168, 255, .08); font-size: 12px; }
+      .content { width: min(770px, 100%); margin: 0 auto; padding: 56px 30px 28px; }
+      .eyebrow { margin: 0 0 6px; color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+      h2 { margin: 0; font-size: clamp(24px, 4vw, 34px); line-height: 1.2; letter-spacing: -.03em; }
+      .intro { max-width: 590px; color: var(--muted); font-size: 15px; }
+      .card { margin-top: 28px; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-raised); }
+      .card-title { display: flex; justify-content: space-between; margin-bottom: 13px; font-weight: 650; }
+      .status { color: var(--good); font-size: 12px; }
+      pre { margin: 0; overflow: auto; padding: 16px; border: 1px solid rgba(180, 217, 228, .1); border-radius: 8px; color: #c8d9e2; background: #0c151d; font: 13px/1.65 "Cascadia Code", Consolas, monospace; }
+      body.light pre { border-color: rgba(32, 49, 61, .1); color: #29414c; background: #f7fbfb; }
+      .cyan { color: var(--accent); } .purple { color: var(--skill); } .green { color: var(--good); }
+      .composer { margin-top: auto; padding: 20px 28px 26px; }
+      .input { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 14px; border: 1px solid rgba(79, 209, 197, .34); border-radius: 12px; color: var(--muted); background: rgba(23, 37, 50, .82); box-shadow: 0 0 0 3px rgba(79, 209, 197, .04); }
+      .send { padding: 5px 10px; border-radius: 7px; color: #092021; background: var(--accent); font-weight: 700; }
+      .theme-toggle { padding: 6px 10px; border: 1px solid var(--border); border-radius: 7px; color: var(--ink); background: transparent; font: inherit; cursor: pointer; }
+      @media (max-width: 720px) { .window { grid-template-columns: 1fr; } aside { display: none; } .content { padding-top: 40px; } }
+    </style>
+  </head>
+  <body>
+    <section class="window" aria-label="Aurora Calm theme preview">
+      <aside>
+        <div class="brand"><span class="orb"></span> Codex</div>
+        <button class="new-task">＋ 新任务</button>
+        <p class="label">最近任务</p>
+        <div class="thread active">设计低刺激科技风皮肤</div>
+        <div class="thread">整理主题导入配置</div>
+        <div class="thread">优化代码配色</div>
+      </aside>
+      <main>
+        <header><h1>设计低刺激科技风皮肤</h1><button class="theme-toggle" type="button" id="theme-toggle">切换浅色预览</button></header>
+        <div class="content">
+          <p class="eyebrow">Eye-friendly technology</p>
+          <h2>清醒、专注，<br />不必刺眼。</h2>
+          <p class="intro">用蓝灰承托界面，以柔和青绿提示关键操作；信息层级清楚，但不会用过强的光和色彩争抢注意力。</p>
+          <div class="card">
+            <div class="card-title"><span>主题配置已准备就绪</span><span class="status">● 已校验</span></div>
+            <pre><span class="purple">const</span> <span class="cyan">theme</span> = {
+  surface: <span class="green">"#101A24"</span>,
+  accent: <span class="green">"#4FD1C5"</span>,
+  contrast: <span class="green">78</span>
+};</pre>
+          </div>
+        </div>
+        <div class="composer"><div class="input"><span>输入下一步任务…</span><span class="send">发送 ↑</span></div></div>
+      </main>
+    </section>
+    <script>
+      const button = document.querySelector("#theme-toggle");
+      button.addEventListener("click", () => {
+        const isLight = document.body.classList.toggle("light");
+        button.textContent = isLight ? "切换深色预览" : "切换浅色预览";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+codex-theme-v1:{"codeThemeId":"github-light-default","theme":{"accent":"#167E87","contrast":78,"fonts":{"code":"Cascadia Code, Consolas, monospace","ui":"Microsoft YaHei UI, Segoe UI, sans-serif"},"ink":"#20313D","opaqueWindows":true,"semanticColors":{"diffAdded":"#318A65","diffRemoved":"#C85E5E","skill":"#506FD4"},"surface":"#EDF4F5"},"variant":"light"}

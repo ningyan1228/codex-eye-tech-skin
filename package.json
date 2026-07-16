@@ -1,0 +1,10 @@
+{
+  "name": "codex-eye-tech-skin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Low-stimulation technology-style themes for the Codex desktop app.",
+  "scripts": {
+    "validate": "node scripts/validate-themes.mjs"
+  },
+  "license": "MIT"
+}
