@@ -1,0 +1,15 @@
+# Changelog
+
+## 1.0.0 — 2026-07-16
+
+### Added
+
+- Cyber Aurora：带低刺激青蓝科技感的完整 Codex Windows 皮肤。
+- 本机回环 CDP 注入：不修改 WindowsApps、`app.asar` 或应用签名。
+- 可替换 PNG、JPG、JPEG、WebP 背景图；皮肤运行中可热更新。
+- 安装、启动、验证、恢复及桌面快捷方式脚本。
+
+### Safety
+
+- 调试端口仅使用 `127.0.0.1`。
+- 恢复原生主题时，仅还原皮肤改动过的外观配置项。

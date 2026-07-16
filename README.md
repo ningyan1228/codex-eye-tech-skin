@@ -32,6 +32,10 @@
 
 直接用浏览器打开 [preview.html](preview.html) 即可查看设计意图。预览页面仅用于展示，不是 Codex 的运行界面。
 
+## 可更换背景的完整皮肤（Windows）
+
+原生导入主题不支持背景图。若希望将任意背景图片实际显示在 Codex 界面中，请使用 [Windows Cyber Aurora 皮肤](windows/README.md)：它通过仅绑定本机回环地址的 CDP 注入样式，不修改 Codex 安装文件，并提供更换背景与恢复脚本。
+
 ## 校验
 
 无需安装依赖。运行下列命令可检查主题 JSON 与导入字符串是否彼此一致：
