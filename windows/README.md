@@ -12,11 +12,11 @@
 powershell -ExecutionPolicy Bypass -File .\scripts\install-cyber-skin.ps1
 ```
 
-安装会备份 `%USERPROFILE%\.codex\config.toml`，并创建三个桌面快捷方式：启动皮肤、更换背景、恢复外观。
+安装会备份 `%USERPROFILE%\.codex\config.toml`。不会创建桌面快捷方式；只会加入一个“开始菜单”入口，并把启动、换背景、恢复操作放进系统托盘菜单。
 
 ## 启动皮肤
 
-双击桌面的 `Codex Cyber Aurora`，或运行：
+按 `Win` 键搜索并打开 `Codex Cyber Aurora`。它会启动皮肤版 Codex，并在系统托盘显示控制菜单。也可以运行：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\start-cyber-skin.ps1 -RestartExisting
@@ -26,7 +26,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\start-cyber-skin.ps1 -Restart
 
 ## 随时更换背景
 
-双击 `Codex Cyber Aurora - Change Background`，选择 PNG/JPG/JPEG/WebP 即可。皮肤正在运行时，背景会立即热更新。
+右键系统托盘中的 `Codex Cyber Aurora` 图标，选择“更换背景图片…”，再选择 PNG/JPG/JPEG/WebP 即可。皮肤正在运行时，背景会立即热更新。
 
 也可以带路径运行：
 

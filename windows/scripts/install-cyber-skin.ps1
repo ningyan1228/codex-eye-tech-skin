@@ -35,22 +35,19 @@ Set-Content -LiteralPath $ConfigPath -Value $content -Encoding utf8
 
 if (-not $NoShortcuts) {
   $shell = New-Object -ComObject WScript.Shell
-  $desktopPath = [Environment]::GetFolderPath('Desktop')
   $startMenu = Join-Path $env:APPDATA 'Microsoft\Windows\Start Menu\Programs'
   $powershell = (Get-Command powershell.exe).Source
-  $shortcuts = @(
-    @{ Name = 'Codex Cyber Aurora'; Script = 'start-cyber-skin.ps1'; Arguments = "-Port $Port -RestartExisting"; Folder = $desktopPath },
-    @{ Name = 'Codex Cyber Aurora - Change Background'; Script = 'set-cyber-background.ps1'; Arguments = "-Port $Port"; Folder = $desktopPath },
-    @{ Name = 'Codex Cyber Aurora - Restore'; Script = 'restore-cyber-skin.ps1'; Arguments = "-Port $Port"; Folder = $desktopPath },
-    @{ Name = 'Codex Cyber Aurora'; Script = 'start-cyber-skin.ps1'; Arguments = "-Port $Port -RestartExisting"; Folder = $startMenu }
-  )
-  foreach ($item in $shortcuts) {
-    $shortcut = $shell.CreateShortcut((Join-Path $item.Folder ($item.Name + '.lnk')))
-    $shortcut.TargetPath = $powershell
-    $shortcut.Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $PSScriptRoot $item.Script)`" $($item.Arguments)"
-    $shortcut.WorkingDirectory = $SkinRoot
-    $shortcut.Save()
-  }
+  $trayScript = Join-Path $PSScriptRoot 'cyber-skin-tray.ps1'
+  $shortcut = $shell.CreateShortcut((Join-Path $startMenu 'Codex Cyber Aurora.lnk'))
+  $shortcut.TargetPath = $powershell
+  $shortcut.Arguments = "-NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$trayScript`" -Port $Port -LaunchSkin"
+  $shortcut.WorkingDirectory = $SkinRoot
+  $shortcut.Description = 'Launch Codex Cyber Aurora and open its tray controls'
+  $shortcut.Save()
+
+  $desktop = [Environment]::GetFolderPath('Desktop')
+  @('Codex Cyber Aurora.lnk', 'Codex Cyber Aurora - Change Background.lnk', 'Codex Cyber Aurora - Restore.lnk') |
+    ForEach-Object { Remove-Item -LiteralPath (Join-Path $desktop $_) -Force -ErrorAction SilentlyContinue }
 }
 
-Write-Host 'Cyber Aurora installed. Launch it with the desktop shortcut or start-cyber-skin.ps1.'
+Write-Host 'Cyber Aurora installed. Search for Codex Cyber Aurora in the Start menu; controls will appear in the system tray.'
