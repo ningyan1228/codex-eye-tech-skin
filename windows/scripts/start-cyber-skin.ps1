@@ -40,9 +40,9 @@ if (-not (Test-CodexDebugPort $Port)) {
   $package = Get-AppxPackage OpenAI.Codex | Sort-Object Version -Descending | Select-Object -First 1
   if (-not $package) { throw 'The OpenAI.Codex Store package is not installed.' }
   $candidates = @(
-    (Join-Path $package.InstallLocation 'app\resources\codex.exe'),
     (Join-Path $package.InstallLocation 'app\ChatGPT.exe'),
-    (Join-Path $package.InstallLocation 'app\resources\ChatGPT.exe')
+    (Join-Path $package.InstallLocation 'app\resources\ChatGPT.exe'),
+    (Join-Path $package.InstallLocation 'app\resources\codex.exe')
   )
   $exe = $candidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
   if (-not $exe) { throw 'Could not locate the current Codex executable in its Store package.' }
