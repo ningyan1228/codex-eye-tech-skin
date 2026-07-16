@@ -30,14 +30,25 @@ $target = Join-Path $Backgrounds $targetName
 Copy-Item -LiteralPath $source.FullName -Destination $target
 @{ file = "backgrounds/$targetName"; label = [System.IO.Path]::GetFileNameWithoutExtension($source.Name) } | ConvertTo-Json | Set-Content -LiteralPath $Config -Encoding utf8
 
-$node = Get-Command node -ErrorAction Stop
+function Get-NodeExecutable {
+  $command = Get-Command node -ErrorAction SilentlyContinue
+  if ($command) { return $command.Source }
+  $cacheRoot = Join-Path $HOME '.cache\codex-runtimes'
+  $bundled = Get-ChildItem -Path (Join-Path $cacheRoot '*\dependencies\node\bin\node.exe') -File -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
+  if ($bundled) { return $bundled }
+  throw 'Node.js was not found. Install Node.js or run this skin from a Codex installation that includes the bundled runtime.'
+}
+
+$node = Get-NodeExecutable
 $debugReady = $false
 try {
   $targets = Invoke-RestMethod "http://127.0.0.1:$Port/json/list" -TimeoutSec 1
   $debugReady = [bool]($targets | Where-Object { $_.type -eq 'page' -and $_.url -like 'app://*' })
 } catch {}
 if ($debugReady) {
-  & $node.Source (Join-Path $PSScriptRoot 'injector.mjs') --once --port $Port
+  & $node (Join-Path $PSScriptRoot 'injector.mjs') --once --port $Port
   if ($LASTEXITCODE -ne 0) { throw 'The selected background was saved but could not be applied to the current Codex window.' }
   Write-Host 'Background updated in the running Cyber Aurora skin.'
   exit 0

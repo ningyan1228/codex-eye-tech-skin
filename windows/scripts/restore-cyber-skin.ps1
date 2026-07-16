@@ -13,8 +13,19 @@ if (Test-Path -LiteralPath $StatePath) {
   Remove-Item -LiteralPath $StatePath -Force -ErrorAction SilentlyContinue
 }
 
-$node = Get-Command node -ErrorAction Stop
-try { & $node.Source (Join-Path $PSScriptRoot 'injector.mjs') --remove --port $Port --timeout-ms 3000 } catch {}
+function Get-NodeExecutable {
+  $command = Get-Command node -ErrorAction SilentlyContinue
+  if ($command) { return $command.Source }
+  $cacheRoot = Join-Path $HOME '.cache\codex-runtimes'
+  $bundled = Get-ChildItem -Path (Join-Path $cacheRoot '*\dependencies\node\bin\node.exe') -File -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
+  if ($bundled) { return $bundled }
+  throw 'Node.js was not found. Install Node.js or run this skin from a Codex installation that includes the bundled runtime.'
+}
+
+$node = Get-NodeExecutable
+try { & $node (Join-Path $PSScriptRoot 'injector.mjs') --remove --port $Port --timeout-ms 3000 } catch {}
 
 if ($Uninstall) {
   $desktop = [Environment]::GetFolderPath('Desktop')
