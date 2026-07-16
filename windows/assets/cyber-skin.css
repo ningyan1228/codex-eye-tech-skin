@@ -34,6 +34,21 @@ html.codex-cyber-skin body::before {
   mask-image: linear-gradient(to bottom, black, rgba(0, 0, 0, .4));
 }
 
+/* The Windows title/menu strip is transparent in this build of ChatGPT. A
+   restrained light backing keeps its native dark labels readable over photos. */
+html.codex-cyber-skin body::after {
+  content: "";
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 35px;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(231, 239, 241, .94), rgba(213, 226, 230, .86));
+  border-bottom: 1px solid rgba(11, 38, 48, .22);
+}
+
 html.codex-cyber-skin aside,
 html.codex-cyber-skin aside.app-shell-left-panel,
 html.codex-cyber-skin [class*="sidebar"] {
@@ -91,10 +106,68 @@ html.codex-cyber-skin main.main-surface > header.app-header-tint {
   backdrop-filter: blur(18px) !important;
 }
 
+/* App headers are dark glass surfaces, so light-theme utility classes must
+   not be allowed to restore near-black labels or icons inside them. */
+html.codex-cyber-skin :is(header.app-header-tint, [class*="app-header"], [class*="toolbar"]) {
+  color: #edfafa !important;
+  background-color: rgba(5, 17, 31, .88) !important;
+}
+
+html.codex-cyber-skin :is(header.app-header-tint, [class*="app-header"], [class*="toolbar"]) :is(a, button, p, span, svg) {
+  color: #edfafa !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
+html.codex-cyber-skin :is(header.app-header-tint, [class*="app-header"], [class*="toolbar"]) button {
+  background: rgba(16, 40, 57, .88) !important;
+  border-color: rgba(157, 231, 226, .32) !important;
+}
+
 html.codex-cyber-skin [role="main"] {
   color: var(--cyber-ink) !important;
   background: transparent !important;
   scrollbar-color: rgba(87, 230, 220, .52) transparent;
+}
+
+/* Code blocks in the light base theme carry dark token colors. Preserve a
+   single calm foreground on the dark photo surface instead of unreadable syntax. */
+html.codex-cyber-skin :is(pre, [class*="code-block"], [data-language]) {
+  color: #e9f6fb !important;
+  background: rgba(4, 15, 29, .88) !important;
+  border: 1px solid rgba(118, 220, 216, .22) !important;
+  text-shadow: none !important;
+}
+
+html.codex-cyber-skin :is(pre, [class*="code-block"], [data-language]) * {
+  color: #e9f6fb !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+html.codex-cyber-skin [role="main"] :is(code, [class*="font-mono"]) {
+  color: #e9f6fb !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+html.codex-cyber-skin [role="main"] :is(code, [class*="font-mono"]) * {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* Streaming, edited-file and command-status chips inherit the light theme's
+   muted foreground. Give only these compact status surfaces a stable contrast. */
+html.codex-cyber-skin [role="main"] :is([class*="bg-token"], [class*="status"]):not(button):not([role="button"]) {
+  color: #d9f0f2 !important;
+  background-color: rgba(8, 34, 49, .78) !important;
+  border-color: rgba(116, 220, 216, .28) !important;
+}
+
+html.codex-cyber-skin [role="main"] :is([class*="bg-token"], [class*="status"]):not(button):not([role="button"]) :is(span, p, code, svg) {
+  color: #d9f0f2 !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
 }
 
 /* Keep landing-page headings readable without recolouring the white action
@@ -125,6 +198,7 @@ html.codex-cyber-skin .composer-surface-chrome {
 }
 
 html.codex-cyber-skin .ProseMirror,
+html.codex-cyber-skin [contenteditable="true"],
 html.codex-cyber-skin textarea,
 html.codex-cyber-skin input {
   color: var(--cyber-ink) !important;
@@ -132,10 +206,19 @@ html.codex-cyber-skin input {
 }
 
 html.codex-cyber-skin .ProseMirror p,
+html.codex-cyber-skin [contenteditable="true"] :is(p, span),
 html.codex-cyber-skin textarea::placeholder,
 html.codex-cyber-skin input::placeholder {
   color: #b9d5d9 !important;
   opacity: 1 !important;
+}
+
+html.codex-cyber-skin .ProseMirror :is(.is-empty, .is-editor-empty)::before,
+html.codex-cyber-skin [contenteditable="true"] [data-placeholder]::before,
+html.codex-cyber-skin [contenteditable="true"][data-placeholder]::before {
+  color: #c7e2e5 !important;
+  opacity: 1 !important;
+  text-shadow: 0 1px 9px rgba(0, 0, 0, .68) !important;
 }
 
 html.codex-cyber-skin [data-message-author-role],
