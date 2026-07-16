@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
-  [int]$Port = 9336,
-  [switch]$LaunchSkin
+  [int]$Port = 9336
 )
 
 $ErrorActionPreference = 'Stop'
@@ -22,7 +21,7 @@ $restore = $menu.Items.Add('Restore default appearance')
 $menu.Items.Add('-') | Out-Null
 $exit = $menu.Items.Add('Exit tray manager')
 
-$launch.add_Click({ Start-SkinScript 'start-cyber-skin.ps1' "-Port $Port -RestartExisting" })
+$launch.add_Click({ Start-SkinScript 'start-cyber-skin.ps1' "-Port $Port" })
 $background.add_Click({ Start-SkinScript 'set-cyber-background.ps1' "-Port $Port" })
 $restore.add_Click({ Start-SkinScript 'restore-cyber-skin.ps1' "-Port $Port" })
 
@@ -31,8 +30,7 @@ $tray.Icon = [System.Drawing.SystemIcons]::Information
 $tray.Text = 'Codex Cyber Aurora'
 $tray.ContextMenuStrip = $menu
 $tray.Visible = $true
-$tray.add_DoubleClick({ Start-SkinScript 'start-cyber-skin.ps1' "-Port $Port -RestartExisting" })
+$tray.add_DoubleClick({ Start-SkinScript 'start-cyber-skin.ps1' "-Port $Port" })
 $exit.add_Click({ $tray.Visible = $false; $tray.Dispose(); [System.Windows.Forms.Application]::Exit() })
 
-if ($LaunchSkin) { Start-SkinScript 'start-cyber-skin.ps1' "-Port $Port -RestartExisting" }
 [System.Windows.Forms.Application]::Run()

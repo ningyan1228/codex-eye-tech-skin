@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
   [int]$Port = 9336,
-  [switch]$RestartExisting,
   [switch]$ForegroundInjector
 )
 
@@ -34,11 +33,7 @@ $node = Get-NodeExecutable
 $debugReady = Test-CodexDebugPort $Port
 $processes = @(Get-Process codex, ChatGPT -ErrorAction SilentlyContinue | Where-Object { $_.MainWindowHandle -ne 0 })
 if (-not $debugReady -and $processes.Count -gt 0) {
-  if (-not $RestartExisting) { throw "Codex is already running without skin debugging. Close it or rerun with -RestartExisting." }
-  foreach ($process in $processes) { [void]$process.CloseMainWindow() }
-  Start-Sleep -Seconds 2
-  Get-Process codex, ChatGPT -ErrorAction SilentlyContinue | Stop-Process -Force
-  Start-Sleep -Milliseconds 700
+  throw "ChatGPT/Codex is already open. Close it yourself, then run this script again. This script never closes or restarts your applications."
 }
 
 if (-not (Test-CodexDebugPort $Port)) {

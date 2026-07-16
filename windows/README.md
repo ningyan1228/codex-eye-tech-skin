@@ -12,11 +12,15 @@
 
 在本目录执行：
 
+这是一个非官方的运行时皮肤：它不写 Codex 配置，但需要以本机调试端口启动 Codex。请仅在接受这一风险的前提下使用。
+
+先由你自己关闭所有 ChatGPT/Codex 窗口，再运行：
+
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\cyber-skin-tray.ps1 -LaunchSkin
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start-cyber-skin.ps1
 ```
 
-该命令会在系统托盘显示控制菜单，并按需重启 Codex，以便只在 `127.0.0.1:9336` 开放本机调试端口；不会对局域网开放端口。它不会写入或迁移任何 Codex 配置。
+脚本绝不会关闭或重启现有窗口；它只会新启动一个仅绑定到 `127.0.0.1:9336` 的 Codex 会话，并且不会写入或迁移任何 Codex 配置。
 
 ## 随时更换背景
 
