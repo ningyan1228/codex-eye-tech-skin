@@ -2,6 +2,8 @@
 
 完整中文步骤请看 [使用教程.md](使用教程.md)。
 
+![Cyber Aurora 壁纸皮肤预览](assets/promo/cyber-aurora-preview.png)
+
 这是一个可更换背景图的 Codex 科技风皮肤。它仅通过本机回环 CDP 在运行期间注入样式，不会修改 WindowsApps、`app.asar`、应用签名或 `~/.codex/config.toml`。
 
 更新记录见 [CHANGELOG.md](CHANGELOG.md)，参考来源说明见 [NOTICE.md](NOTICE.md)。
