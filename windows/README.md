@@ -22,6 +22,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\start-cyber-skin.p
 
 脚本绝不会关闭或重启现有窗口；它只会新启动一个仅绑定到 `127.0.0.1:9336` 的 Codex 会话，并且不会写入或迁移任何 Codex 配置。
 
+`launch-cyber-aurora.ps1` is the one-click launcher used by the optional taskbar icon. It shows a message instead of closing an already-open ChatGPT/Codex window.
+
 ## 随时更换背景
 
 右键系统托盘中的 `Codex Cyber Aurora` 图标，选择 `Change background image...`，再选择 PNG/JPG/JPEG/WebP 即可。皮肤正在运行时，背景会立即热更新。
