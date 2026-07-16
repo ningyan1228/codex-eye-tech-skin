@@ -4,8 +4,7 @@ import { basename, join } from "node:path";
 const themeFiles = ["aurora-calm-dark", "aurora-calm-light"];
 const hexColor = /^#[0-9a-f]{6}$/i;
 const supportedCodeThemes = new Set([
-  "github-dark-dimmed",
-  "github-light-default",
+  "codex",
 ]);
 
 function assert(condition, message) {
